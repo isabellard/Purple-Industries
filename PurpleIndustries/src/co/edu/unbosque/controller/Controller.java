@@ -23,7 +23,7 @@ public class Controller {
 				try {
 					con.imprimirConSalto("\n 🏥🚑💉💖Bienvenido al sistema de pacientes🏥🚑💉💖");
 					con.imprimirConSalto("1. Ingresar un paciente");
-					con.imprimirConSalto("2. Ingresar nuevo doctore");
+					con.imprimirConSalto("2. Menu para doctores");
 					con.imprimirConSalto("3. Diagnosticar pacientes");
 					con.imprimirConSalto("0. salir");
 					con.imprimirConSalto("Elija una opcion");
@@ -64,38 +64,25 @@ public class Controller {
 							Paciente nuevo = new Paciente(nombre, sangre, altura);
 							mf.getPacienteDAO().crear(nuevo);
 							
+							
+						
 						}
 						break;
 					case 2: 
-						boolean doctor = true;
-						while(doctor) {
-							
-
-							con.imprimirConSalto("Ingresa el nombre del doctor 🧑🏼‍⚕️✨");
-							String nombre= con.leerLinea();
-							con.imprimirConSalto(nombre);
 						
-							con.imprimirConSalto("Ingrese el Numero de identidad del doctor 🧑🏼‍⚕️✨");
-							int id = con.leerEntero();
-							con.imprimirConSalto("");
-							
-							con.imprimirConSalto("Ingrese el tipo de sangre del doctor 🧑🏼‍⚕️✨ ");
-							String sangre= con.leerLinea();
-							con.imprimirConSalto("");
-							
-							con.imprimirConSalto("Ingrese el peso del doctor 🧑🏼‍⚕️✨");
-							int peso = con.leerEntero();
-							con.imprimirConSalto("");
-							
-							con.imprimirConSalto("Ingrese la altura del doctor 🧑🏼‍⚕️✨");
-							int altura = con.leerEntero();
-							con.imprimirConSalto("");
-						
-							
-						}
 						
 					}
-				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+
 					
 				}catch(InputMismatchException e ) {
 					con.quemarLinea();

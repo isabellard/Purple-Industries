@@ -39,14 +39,20 @@ public class Controller {
 					case 1: 
 						boolean paciente = true;
 						while (paciente) {
-							con.imprimirConSalto("Ingrese el nombre del paciente 🧑🏼‍⚕️✨");
+							
+							con.imprimirConSalto("Ingresa el nombre del paciente 🧑🏼‍⚕️✨");
+							String nombre= con.leerLinea();
+							con.imprimirConSalto(nombre);
+						
+							con.imprimirConSalto("Ingrese el Numero de identidad del paciente 🧑🏼‍⚕️✨");
+							int id = con.leerEntero();
+							con.imprimirConSalto("");
+							
+							con.imprimirConSalto("Ingrese el tipo de sangre del paciente 🧑🏼‍⚕️✨ ");
 							
 							
+						
 						}
-							
-							
-							
-			
 						break;
 					case 2: 
 						

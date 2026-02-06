@@ -23,11 +23,11 @@ public class Controller {
 		while (!salir) {
 			try {
 				con.imprimirConSalto("\n 🏥🚑💉💖Bienvenido al sistema de pacientes🏥🚑💉💖");
+				con.imprimirConSalto("\nElija una opcion:");
 				con.imprimirConSalto("1. Ingresar un paciente");
 				con.imprimirConSalto("2. Menu para doctores");
 				con.imprimirConSalto("3. Diagnosticar pacientes");
 				con.imprimirConSalto("0. salir");
-				con.imprimirConSalto("Elija una opcion");
 
 				int opcion = con.leerEntero();
 				con.leerLinea();
@@ -71,6 +71,8 @@ public class Controller {
 
 						Paciente nuevo = new Paciente(nombre, fechaDeNacimiento, documento, altura, peso, rh, 1, "");
 						mf.getPacienteDAO().crear(nuevo);
+						
+						
 
 					} catch (Exception e) {
 						// TODO: handle exception
@@ -108,12 +110,18 @@ public class Controller {
 
 				case 3:
 					try {
-						con.imprimirConSalto("Seleccionar el paicente a diagnosticar 😷🤒🧑🏼");
+						con.imprimirConSalto("Seleccionar el paciente a diagnosticar 😷🤒🧑🏼");
 						con.imprimirConSalto("");
 						con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
-						con.imprimirConSalto("ingrese el id del paciente a seleccionar:");
+						con.imprimirConSalto("ingrese el id del paciente a seleccionar: ");
 						int documentoAux =con.leerEntero();
-				
+						con.quemarLinea();
+//						mf.getPacienteDAO().getPacienteById(documentoAux);
+						con.imprimirConSalto("Cual será es el triage del paciente?");
+						
+						con.imprimirConSalto("ingrese el diagnotico final del paciente: ");
+						
+						
 						
 					} catch (Exception e) {
 						// TODO: handle exception

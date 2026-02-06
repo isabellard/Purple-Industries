@@ -53,6 +53,8 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
 			return 1;
 		}
 	}
+	
+	
 
 	@Override
 	public String mostrarTodo() {
@@ -120,6 +122,12 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
 
 		}
 
+	}
+
+	public void getPacienteById(int documentoAux) {
+		
+		
+		
 	}
 
 }

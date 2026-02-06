@@ -94,6 +94,7 @@ public class Controller {
 						con.imprimirConSalto("Ingrese el numero de documento del doctor 🧑🏼‍⚕️✨");
 						int documento = con.leerEntero();
 						con.imprimirConSalto("");
+						con.quemarLinea();
 
 						con.imprimirConSalto("Ingrese la especialidad del doctor 🧑🏼‍⚕️✨");
 						String especialidad = con.leerLinea();
@@ -118,8 +119,8 @@ public class Controller {
 						con.quemarLinea();
 						
 						con.imprimirConSalto("El pasiente seleccionado es:");
-//						mf.getPacienteDAO().getPacienteById(documentoAux);
-						con.imprimirConSalto("Ingrese el numero del triage del paciente 😷🧑🏼‍⚕️✨");
+						con.imprimirConSalto(mf.getPacienteDAO().getPacienteById(documento).toString());
+						con.imprimirConSalto("\nIngrese el numero del triage del paciente 😷🧑🏼‍⚕️✨");
 						con.imprimirConSalto("1. Resucitacion 🩻");
 						con.imprimirConSalto("2. Emergencia 🏥 ");
 						con.imprimirConSalto("3. Urgencia 🚑");
@@ -131,7 +132,9 @@ public class Controller {
 						con.imprimirConSalto("ingrese el diagnotico final del paciente: ");
 						String diagnostico= con.leerLinea();
 						
-						
+						mf.getPacienteDAO().modificarDatosMedicos(documento, triage, diagnostico);
+						con.imprimirConSalto("Los datos del paciente ahora son: ");
+						con.imprimirConSalto(mf.getPacienteDAO().getPacienteById(documento).toString());
 						
 					} catch (Exception e) {
 						// TODO: handle exception

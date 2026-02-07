@@ -2,7 +2,7 @@ SISTEMA DE PACIENTES purpleIndutries
 
 A través de este programa se podrá hacer el manejo de el CRUD completo tanto de pacientes como de doctores. Los doctores podrán diagnosticar a sus pacientes ingresando el triage y diagnostico a sus datos personales. Cualquier persona con el programa podrá editar el archivo de googleSheets desde el mismo aplicativo. Para ingresar al documento donde se encuentran lo datos, entre al siguiente link: 
 
-https://docs.google.com/spreadsheets/d/11NjKsgqZMBG9B2587FTMb1l85YKrz2nt1ZqbILoJuPk/edit?usp=drivesdk
+https://docs.google.com/spreadsheets/d/1GG7eWByvVlWKzcgyYBlHTw_CNUjWros9LkZcIxcKHj0/edit?usp=sharing
 
 A continuación el menú del aplicativo con las opciones: 
 

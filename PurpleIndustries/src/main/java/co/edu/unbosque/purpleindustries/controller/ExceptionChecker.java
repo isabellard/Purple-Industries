@@ -1,5 +1,7 @@
 package co.edu.unbosque.purpleindustries.controller;
 
+import java.util.Iterator;
+
 import co.edu.unbosque.purpleindustries.util.exception.EmptyFieldException;
 import co.edu.unbosque.purpleindustries.util.exception.InvalidFormatException;
 import co.edu.unbosque.purpleindustries.util.exception.NegativeValueException;
@@ -31,7 +33,22 @@ public class ExceptionChecker {
 		}
 	}
 
-	public static void checkId(int id) throws NegativeValueException, OutOfRangeException {
+	public static void checkDocumento(int id) throws NegativeValueException, OutOfRangeException {
+
+		char documento[] = new char[10];
+
+		String num = String.valueOf(id);
+
+		for (int i = 0; i < documento.length; i++) {
+			documento[i] = '*';
+			if (num.charAt(i) == '0') {
+
+				documento[i] = num.charAt(i);
+			} else {
+				continue;
+			}
+
+		}
 
 		if (id <= 0) {
 			throw new NegativeValueException("id");
@@ -54,17 +71,7 @@ public class ExceptionChecker {
 		}
 	}
 
-	public static void checkDocumento(int documento) throws NegativeValueException, OutOfRangeException {
-
-		if (documento <= 0) {
-			throw new NegativeValueException("documento");
-		}
-
-		if (documento > 999999999) {
-			throw new OutOfRangeException("documento", "1 - 999999999");
-		}
-	}
-
+	
 	public static void checkAltura(double altura) throws NegativeValueException, OutOfRangeException {
 
 		if (altura <= 0) {

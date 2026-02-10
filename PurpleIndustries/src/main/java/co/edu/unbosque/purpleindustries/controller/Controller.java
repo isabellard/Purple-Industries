@@ -333,9 +333,9 @@ public class Controller {
 				case 4:
 					int documentoDoctor1 = 0;
 					while (true) {
-						con.imprimirConSalto("Seleccionar el paciente para actualizar 😷🤒🧑🏼");
-						con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
-						con.imprimirConSalto("Ingrese el número de identificación del paciente:");
+						con.imprimirConSalto("Seleccionar el doctor para actualizar 😷🤒🧑🏼");
+						con.imprimirConSalto(mf.getDoctorDAO().mostrarTodo());
+						con.imprimirConSalto("Ingrese el número de identificación del doctor:");
 
 						try {
 							documentoPaciente1 = con.leerEntero();
@@ -435,7 +435,7 @@ public class Controller {
 							con.imprimirConSalto("Error: " + e.getMessage());
 						}
 					}
-					mf.getPacienteDAO().eliminar(mf.getPacienteDAO().getPacienteById(documento2));
+					mf.getDoctorDAO().eliminar(mf.getDoctorDAO().getDoctorById(documento2));
 					con.imprimirConSalto("Doctor eliminado");
 					break;
 				case 7:

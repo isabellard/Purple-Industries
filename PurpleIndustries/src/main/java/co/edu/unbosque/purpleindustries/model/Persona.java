@@ -1,16 +1,18 @@
 package co.edu.unbosque.purpleindustries.model;
 
+import java.time.LocalDateTime;
+
 public abstract class Persona {
 
 	private String nombre;
-	private String fechaDeNacimiento;
+	private LocalDateTime fechaDeNacimiento;
 	private int documento;
 
 	public Persona() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Persona(String nombre, String fechaDeNacimiento, int documento) {
+	public Persona(String nombre, LocalDateTime fechaDeNacimiento, int documento) {
 		super();
 		this.nombre = nombre;
 		this.fechaDeNacimiento = fechaDeNacimiento;
@@ -32,7 +34,7 @@ public abstract class Persona {
 	/**
 	 * @return the fechaDeNacimiento
 	 */
-	public String getFechaDeNacimiento() {
+	public LocalDateTime getFechaDeNacimiento() {
 		return fechaDeNacimiento;
 	}
 
@@ -53,7 +55,7 @@ public abstract class Persona {
 	/**
 	 * @param fechaDeNacimiento the fechaDeNacimiento to set
 	 */
-	public void setFechaDeNacimiento(String fechaDeNacimiento) {
+	public void setFechaDeNacimiento(LocalDateTime fechaDeNacimiento) {
 		this.fechaDeNacimiento = fechaDeNacimiento;
 	}
 

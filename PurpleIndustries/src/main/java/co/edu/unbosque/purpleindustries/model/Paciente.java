@@ -1,5 +1,7 @@
 package co.edu.unbosque.purpleindustries.model;
 
+import java.time.LocalDateTime;
+
 public class Paciente extends Persona {
 
 	private double altura;
@@ -12,7 +14,7 @@ public class Paciente extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Paciente(String nombre, String fechaDeNacimiento, int documento) {
+	public Paciente(String nombre, LocalDateTime fechaDeNacimiento, int documento) {
 		super(nombre, fechaDeNacimiento, documento);
 		// TODO Auto-generated constructor stub
 	}
@@ -28,7 +30,6 @@ public class Paciente extends Persona {
 
 	public Paciente(String nombre, String fechaDeNacimiento, int documento, double altura, double peso, String rh,
 			int triage, String diagnostico) {
-		super(nombre, fechaDeNacimiento, documento);
 		this.altura = altura;
 		this.peso = peso;
 		this.rh = rh;

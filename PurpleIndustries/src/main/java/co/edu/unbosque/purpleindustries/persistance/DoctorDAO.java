@@ -116,7 +116,7 @@ public class DoctorDAO implements OperacionDAO<Doctor> {
 
         for (int i = 0; i < datos.size(); i++) {
             List<String> fila = datos.get(i);
-            if (fila.size() >= 8) {
+            if (fila.size() >= 4) {
                 try {
                     String nombre = fila.get(0);
                     String fechaDeNacimiento = fila.get(1);

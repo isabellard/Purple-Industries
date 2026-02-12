@@ -1,5 +1,6 @@
 package co.edu.unbosque.purpleindustries.controller;
 
+import co.edu.unbosque.purpleindustries.util.exception.EmailException;
 import co.edu.unbosque.purpleindustries.util.exception.EmptyFieldException;
 import co.edu.unbosque.purpleindustries.util.exception.InvalidFormatException;
 import co.edu.unbosque.purpleindustries.util.exception.NegativeValueException;
@@ -115,6 +116,13 @@ public class ExceptionChecker {
 		if (especialidad.matches("\\d+")) {
 			throw new InvalidFormatException("La especialidad no puede ser solo números");
 		}
+	}
+	
+	public static void checkEmail(String email) throws EmailException {
+		if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")){
+			throw new EmailException(email);
+		}
+		
 	}
 
 }

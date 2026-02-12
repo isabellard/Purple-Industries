@@ -13,10 +13,8 @@ import co.edu.unbosque.purpleindustries.util.exception.OutOfRangeException;
 import co.edu.unbosque.purpleindustries.view.Console;
 
 import java.time.YearMonth;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
-import java.util.Random;
 import java.time.LocalDate;
 
 public class Controller {
@@ -47,6 +45,7 @@ public class Controller {
 				con.imprimirConSalto("7. Ver todos los pacientes");
 				con.imprimirConSalto("8. Ver todos los doctores");
 				con.imprimirConSalto("9. Diagnosticar pacientes");
+				con.imprimirConSalto("10. Ingresar tiempo de atencion del paciente");
 				con.imprimirConSalto("10. Descargar reporte");
 				con.imprimirConSalto("0. salir");
 
@@ -70,7 +69,7 @@ public class Controller {
 				case 1:
 					try {
 						String nombre = "";
-						String nombreModificado = ""; 
+						String nombreModificado = "";
 						while (true) {
 							con.imprimirConSalto("Ingresa el nombre del paciente 🧑🏼‍⚕️✨");
 							nombre = con.leerLinea();
@@ -179,8 +178,8 @@ public class Controller {
 							}
 						}
 
-						Paciente nuevo = new Paciente(nombreModificado, fechaDeNacimiento, id, email, altura, peso, rh, 1,
-								"Sin registrar", LocalDate.now());
+						Paciente nuevo = new Paciente(nombreModificado, fechaDeNacimiento, id, email, altura, peso, rh,
+								1, "Sin registrar", LocalDate.now(), "Sin registrar");
 						mf.getPacienteDAO().crear(nuevo);
 
 					} catch (Exception e) {
@@ -409,7 +408,7 @@ public class Controller {
 					LocalDate fechaIngresoOriginal = actual.getFechaIngreso();
 
 					Paciente nuevo = new Paciente(nombre, fechaDeNacimiento, id, email, altura, (peso + ""), rh, 1,
-							"Sin registrar", fechaIngresoOriginal);
+							"Sin registrar", fechaIngresoOriginal, "Sin registrar");
 					mf.getPacienteDAO().actualizar(id, nuevo);
 					con.imprimirConSalto("Paciente " + nombre + "actualizado correctamente");
 					break;
@@ -647,7 +646,61 @@ public class Controller {
 						// TODO: handle exception
 					}
 					break;
+
 				case 10: {
+					try {
+						String documentoPaciente = "";
+						while (true) {
+							con.imprimirConSalto("Seleccionar el paciente tratado 😷🤒🧑🏼");
+							con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
+							con.imprimirConSalto("Ingrese el número de identificación del paciente:");
+
+							try {
+								int pac = con.leerEntero();
+								ExceptionChecker.checkDocumento(pac);
+								documentoPaciente = mf.rellenarDocumento(pac);
+								con.imprimirConSalto(mf.getPacienteDAO().getPacienteById(documentoPaciente).toString());
+								con.quemarLinea();
+								break;
+							} catch (InputMismatchException e) {
+								con.imprimirConSalto("Error: debe ingresar un número válido.");
+								con.quemarLinea();
+							} catch (NegativeValueException | OutOfRangeException e) {
+								con.imprimirConSalto("Error: " + e.getMessage());
+							}
+						}
+
+						if (mf.documentoExiste(documentoPaciente) == false) {
+							System.out.println("El documento no existe. Vuelva a intentarlo");
+							break;
+						}
+
+						String tiempo = "";
+						while (true) {
+							con.imprimirConSalto("Ingrese el tiempo de atencion");
+							con.imprimirConSalto("1. Menos de 1 min 🩻");
+							con.imprimirConSalto("2. Entre 2 a 5 min  🏥");
+							con.imprimirConSalto("3. Entre 5 a 10 min 🚑");
+							con.imprimirConSalto("4. Entre 10 a 15 min 🤒");
+							con.imprimirConSalto("5. Mayor a 15 min 🩺");
+
+							try {
+								int time = con.leerEntero();
+								con.quemarLinea();
+								con.imprimirConSalto("Tiempo registrado: " + tiempo);
+								break;
+							} catch (InputMismatchException e) {
+								con.imprimirConSalto("Error: debe ingresar un número.");
+								con.quemarLinea();
+							}
+						}
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+
+					break;
+				}
+				case 11: {
 					con.imprimirConSalto("Cómo desea llamar al archivo: ");
 					String nombreArchivo = con.leerLinea();
 					exportarReporteMensualActual(nombreArchivo);
@@ -665,7 +718,6 @@ public class Controller {
 
 		}
 	}
-
 
 	public String unidadesPeso(double peso) {
 		double gr;
@@ -687,6 +739,7 @@ public class Controller {
 
 		pdf.generarReporteMensualPacientes(mf.getPacienteDAO().getListaPacientes(), periodoActual, nombreArchivo);
 	}
+	
 
 	private String preguntarEstado(List<String> estados, String texto) {
 		String valor = null;

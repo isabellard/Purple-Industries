@@ -1,5 +1,7 @@
 package co.edu.unbosque.purpleindustries.model;
 
+import java.time.LocalDate;
+
 public class Paciente extends Persona {
 
 	private double altura;
@@ -7,39 +9,42 @@ public class Paciente extends Persona {
 	private String rh;
 	private int triage;
 	private String diagnostico;
+	private LocalDate fechaIngreso;
 
 	public Paciente() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Paciente(String nombre, String fechaDeNacimiento, int documento) {
+	public Paciente(String nombre, String fechaDeNacimiento, int documento, LocalDate fechaIngreso) {
 		super(nombre, fechaDeNacimiento, documento);
-		// TODO Auto-generated constructor stub
+		this.fechaIngreso = (fechaIngreso != null) ? fechaIngreso : LocalDate.now();
 	}
 
-	public Paciente(double altura, String peso, String rh, int triage, String diagnostico) {
+	public Paciente(double altura, String peso, String rh, int triage, String diagnostico, LocalDate fechaIngreso) {
 		super();
 		this.altura = altura;
 		this.peso = peso;
 		this.rh = rh;
 		this.triage = triage;
 		this.diagnostico = diagnostico;
+		this.fechaIngreso = (fechaIngreso != null) ? fechaIngreso : LocalDate.now();
 	}
 
 	public Paciente(String nombre, String fechaDeNacimiento, int documento, double altura, String peso, String rh,
-			int triage, String diagnostico) {
+			int triage, String diagnostico, LocalDate fechaIngreso) {
 		super(nombre, fechaDeNacimiento, documento);
 		this.altura = altura;
 		this.peso = peso;
 		this.rh = rh;
 		this.triage = triage;
 		this.diagnostico = diagnostico;
+		this.fechaIngreso = (fechaIngreso != null) ? fechaIngreso : LocalDate.now();
 	}
 
 	@Override
 	public String toString() {
 		return super.toString() + "\n Altura: " + altura + "\n Peso: " + peso + "\n Rh: " + rh + "\n Triage: " + triage
-				+ "\n Diagnóstico: " + diagnostico + "\n--------------------------------";
+				+ "\n Diagnóstico: " + diagnostico + "\n Fecha de Ingreso: " + fechaIngreso + "\n--------------------------------";
 	}
 
 	/**
@@ -82,6 +87,14 @@ public class Paciente extends Persona {
 	 */
 	public void setAltura(double altura) {
 		this.altura = altura;
+	}
+
+	public LocalDate getFechaIngreso() { 
+		return fechaIngreso; 
+	}
+
+    public void setFechaIngreso(LocalDate fechaIngreso) { 
+		this.fechaIngreso = fechaIngreso; 
 	}
 
 	/**

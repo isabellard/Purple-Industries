@@ -2,6 +2,7 @@ package co.edu.unbosque.purpleindustries.persistance;
 
 import co.edu.unbosque.purpleindustries.model.Paciente;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
 
     public PacienteDAO() {
         listaPacientes = new ArrayList<>();
-        //cargarDesdeArchivo();
+        cargarDesdeArchivo();
     }
 
     @Override
@@ -123,6 +124,7 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
             fila.add(paciente.getRh());
             fila.add(paciente.getTriage());
             fila.add(paciente.getDiagnostico());
+            fila.add(paciente.getFechaIngreso() != null ? paciente.getFechaIngreso().toString() : LocalDate.now().toString());
             datos.add(fila);
         }
 
@@ -131,11 +133,11 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
     }
 
     public void cargarDesdeArchivo() {
-        List<List<String>> datos = SheetsManager.leerDesdeSheets(TEXT_FILE_NAME, "A:H");
+        List<List<String>> datos = SheetsManager.leerDesdeSheets(TEXT_FILE_NAME, "A:I");
 
         for (int i = 0; i < datos.size(); i++) {
             List<String> fila = datos.get(i);
-            if (fila.size() >= 8) {
+            if (fila.size() >= 9) {
                 try {
                     String nombre = fila.get(0);
                     String fechaDeNacimiento = fila.get(1);
@@ -145,8 +147,10 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
                     String rh = fila.get(5);
                     int triage = Integer.parseInt(fila.get(6));
                     String diagnostico = fila.get(7);
+                    String fechaIngresoStr = fila.get(8);
+                    LocalDate fechaIngreso = LocalDate.parse(fechaIngresoStr);
                     listaPacientes.add(
-                            new Paciente(nombre, fechaDeNacimiento, documento, altura, peso, rh, triage, diagnostico));
+                            new Paciente(nombre, fechaDeNacimiento, documento, altura, peso, rh, triage, diagnostico, fechaIngreso));
                 } catch (NumberFormatException e) {
                     System.err.println("Error en formato de números en fila " + (i + 1));
                 } catch (Exception e) {
@@ -156,5 +160,9 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
         }
 
     }
+
+    public ArrayList<Paciente> getListaPacientes() {
+    return listaPacientes;
+}
 
 }

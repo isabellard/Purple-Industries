@@ -52,6 +52,19 @@
 			<artifactId>google-api-client</artifactId>
 			<version>2.2.0</version>
 		</dependency>
+		<!-- iText (com.lowagie) -->
+    <dependency>
+        <groupId>com.lowagie</groupId>
+        <artifactId>itext</artifactId>
+        <version>2.1.7</version>
+    </dependency>
+
+    <!-- JFreeChart -->
+    <dependency>
+        <groupId>org.jfree</groupId>
+        <artifactId>jfreechart</artifactId>
+        <version>1.5.3</version>
+    </dependency>
 
 		<dependency>
 			<groupId>com.google.oauth-client</groupId>

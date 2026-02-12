@@ -70,13 +70,15 @@ public class Controller {
 				case 1:
 					try {
 						String nombre = "";
+						String nombreModificado = ""; 
 						while (true) {
 							con.imprimirConSalto("Ingresa el nombre del paciente 🧑🏼‍⚕️✨");
 							nombre = con.leerLinea();
 
 							try {
 								ExceptionChecker.checkNombre(nombre);
-								con.imprimirConSalto("Nombre registrado: " + nombre);
+								nombreModificado = mf.modificarNombre(nombre);
+								con.imprimirConSalto("Nombre registrado: " + nombreModificado);
 								break;
 							} catch (EmptyFieldException | InvalidFormatException e) {
 								con.imprimirConSalto("Error: " + e.getMessage());
@@ -176,7 +178,7 @@ public class Controller {
 							}
 						}
 
-						Paciente nuevo = new Paciente(nombre, fechaDeNacimiento, id, email, altura, peso, rh, 1,
+						Paciente nuevo = new Paciente(nombreModificado, fechaDeNacimiento, id, email, altura, peso, rh, 1,
 								"Sin registrar", LocalDate.now());
 						mf.getPacienteDAO().crear(nuevo);
 

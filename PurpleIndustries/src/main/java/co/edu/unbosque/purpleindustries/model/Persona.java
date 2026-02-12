@@ -4,13 +4,13 @@ public abstract class Persona {
 
 	private String nombre;
 	private String fechaDeNacimiento;
-	private int documento;
+	private String documento;
 
 	public Persona() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Persona(String nombre, String fechaDeNacimiento, int documento) {
+	public Persona(String nombre, String fechaDeNacimiento, String documento) {
 		super();
 		this.nombre = nombre;
 		this.fechaDeNacimiento = fechaDeNacimiento;
@@ -39,7 +39,7 @@ public abstract class Persona {
 	/**
 	 * @return the documento
 	 */
-	public int getDocumento() {
+	public String getDocumento() {
 		return documento;
 	}
 
@@ -60,7 +60,7 @@ public abstract class Persona {
 	/**
 	 * @param documento the documento to set
 	 */
-	public void setDocumento(int documento) {
+	public void setDocumento(String documento) {
 		this.documento = documento;
 	}
 

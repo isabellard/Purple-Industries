@@ -12,7 +12,7 @@ public class Paciente extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Paciente(String nombre, String fechaDeNacimiento, int documento) {
+	public Paciente(String nombre, String fechaDeNacimiento, String documento) {
 		super(nombre, fechaDeNacimiento, documento);
 		// TODO Auto-generated constructor stub
 	}
@@ -26,7 +26,7 @@ public class Paciente extends Persona {
 		this.diagnostico = diagnostico;
 	}
 
-	public Paciente(String nombre, String fechaDeNacimiento, int documento, double altura, String peso, String rh,
+	public Paciente(String nombre, String fechaDeNacimiento, String documento, double altura, String peso, String rh,
 			int triage, String diagnostico) {
 		super(nombre, fechaDeNacimiento, documento);
 		this.altura = altura;

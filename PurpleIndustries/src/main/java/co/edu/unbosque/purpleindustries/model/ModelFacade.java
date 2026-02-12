@@ -11,7 +11,25 @@ public class ModelFacade {
 		doctorDAO = new DoctorDAO();
 		pacienteDAO = new PacienteDAO();
 	}
-
+	
+	public boolean documentoExiste(String id) {
+		if (doctorDAO.getDoctorById(id) != null || pacienteDAO.getPacienteById(id)!=null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public String rellenarDocumento(int documento) {
+		String id = String.valueOf(documento);
+		int n = 10 - id.length(); 
+		for (int i = 0; i < n; i++) {
+			id += "*"; 
+		}
+		return id; 
+		
+	}
+	
 	/**
 	 * @return the doctorDAO
 	 */

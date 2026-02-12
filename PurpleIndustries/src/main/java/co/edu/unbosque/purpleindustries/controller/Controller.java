@@ -89,22 +89,24 @@ public class Controller {
                                 }
                             }
 
-                            int documento = 0;
-                            while (true) {
-                                con.imprimirConSalto("Ingrese el número de identidad del paciente 🧑🏼‍⚕️✨");
-                                try {
-                                    documento = con.leerEntero();
-                                    con.quemarLinea();
-                                    ExceptionChecker.checkDocumento(documento);
-                                    con.imprimirConSalto("Documento registrado: " + documento);
-                                    break;
-                                } catch (InputMismatchException e) {
-                                    con.imprimirConSalto("Error: debe ingresar solo números.");
-                                    con.quemarLinea();
-                                } catch (NegativeValueException | OutOfRangeException e) {
-                                    con.imprimirConSalto("Error: " + e.getMessage());
-                                }
-                            }
+                            String id = ""; 
+						while (true) {
+							con.imprimirConSalto("Ingrese el número de identidad del paciente 🧑🏼‍⚕️✨");
+							try {
+								int documento = con.leerEntero();
+								con.quemarLinea();
+								ExceptionChecker.checkDocumento(documento);
+								id = mf.rellenarDocumento(documento); 
+								ExceptionChecker.checkDocumentoString(mf.documentoExiste(id)); 
+								con.imprimirConSalto("Documento registrado: " + documento);
+								break;
+							} catch (InputMismatchException e) {
+								con.imprimirConSalto("Error: debe ingresar solo números.");
+								con.quemarLinea();
+							} catch (NegativeValueException | OutOfRangeException | IdAlreadyExists e) {
+								con.imprimirConSalto("Error: " + e.getMessage());
+							}
+						}
 
                             String rh = "";
                             while (true) {
@@ -154,7 +156,7 @@ public class Controller {
                                 }
                             }
 
-                            Paciente nuevo = new Paciente(nombre, fechaDeNacimiento, documento, altura, peso, rh, 1,
+                            Paciente nuevo = new Paciente(nombre, fechaDeNacimiento, id, altura, peso, rh, 1,
                                     "Sin registrar");
                             mf.getPacienteDAO().crear(nuevo);
 
@@ -196,22 +198,24 @@ public class Controller {
                                 }
                             }
 
-                            int documento = 0;
-                            while (true) {
-                                con.imprimirConSalto("Ingrese el número de documento del doctor 🧑🏼‍⚕️✨");
-                                try {
-                                    documento = con.leerEntero();
-                                    con.quemarLinea();
-                                    ExceptionChecker.checkDocumento(documento);
-                                    con.imprimirConSalto("Documento registrado: " + documento);
-                                    break;
-                                } catch (InputMismatchException e) {
-                                    con.imprimirConSalto("Error: debe ingresar solo números.");
-                                    con.quemarLinea();
-                                } catch (NegativeValueException | OutOfRangeException e) {
-                                    con.imprimirConSalto("Error: " + e.getMessage());
-                                }
-                            }
+                            String id = "";
+						while (true) {
+							con.imprimirConSalto("Ingrese el número de documento del doctor 🧑🏼‍⚕️✨");
+							try {
+								int documento = con.leerEntero();
+								con.quemarLinea();
+								ExceptionChecker.checkDocumento(documento);
+								id = mf.rellenarDocumento(documento); 
+								ExceptionChecker.checkDocumentoString(mf.documentoExiste(id)); 
+								con.imprimirConSalto("Documento registrado: " + id);
+								break;
+							} catch (InputMismatchException e) {
+								con.imprimirConSalto("Error: debe ingresar solo números.");
+								con.quemarLinea();
+							} catch (NegativeValueException | OutOfRangeException | IdAlreadyExists e) {
+								con.imprimirConSalto("Error: " + e.getMessage());
+							}
+						}
                             String especialidad = "";
                             while (true) {
                                 con.imprimirConSalto("Ingrese la especialidad del doctor 🧑🏼‍⚕️✨");
@@ -226,7 +230,7 @@ public class Controller {
                                 }
                             }
 
-                            Doctor nuevo = new Doctor(nombre, fechaDeNacimiento, documento, especialidad);
+                            Doctor nuevo = new Doctor(nombre, fechaDeNacimiento, id, especialidad);
                             mf.getDoctorDAO().crear(nuevo);
 
                         } catch (Exception e) {
@@ -237,24 +241,30 @@ public class Controller {
                         break;
 
                     case 3:
-                        int documentoPaciente1 = 0;
-                        while (true) {
-                            con.imprimirConSalto("Seleccionar el paciente para actualizar 😷🤒🧑🏼");
-                            con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
-                            con.imprimirConSalto("Ingrese el número de identificación del paciente:");
+                        String id = "";
+					while (true) {
+						con.imprimirConSalto("Seleccionar el paciente para actualizar 😷🤒🧑🏼");
+						con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
+						con.imprimirConSalto("Ingrese el número de identificación del paciente:");
 
-                            try {
-                                documentoPaciente1 = con.leerEntero();
-                                con.quemarLinea();
-                                ExceptionChecker.checkDocumento(documentoPaciente1);
-                                break;
-                            } catch (InputMismatchException e) {
-                                con.imprimirConSalto("Error: debe ingresar un número válido.");
-                                con.quemarLinea();
-                            } catch (NegativeValueException | OutOfRangeException e) {
-                                con.imprimirConSalto("Error: " + e.getMessage());
-                            }
-                        }
+						try {
+							int documentoPaciente1 = con.leerEntero();
+							con.quemarLinea();
+							ExceptionChecker.checkDocumento(documentoPaciente1);
+							id = mf.rellenarDocumento(documentoPaciente1); 
+							break;
+						} catch (InputMismatchException e) {
+							con.imprimirConSalto("Error: debe ingresar un número válido.");
+							con.quemarLinea();
+						} catch (NegativeValueException | OutOfRangeException e) {
+							con.imprimirConSalto("Error: " + e.getMessage());
+						}
+					}
+
+					if (mf.documentoExiste(id)==false) {
+						System.out.println("El documento no existe. Vuelva a intentarlo");
+						break;
+					}
 
                         String nombre = "";
                         while (true) {
@@ -332,30 +342,36 @@ public class Controller {
                             }
                         }
 
-                        Paciente nuevo = new Paciente(nombre, fechaDeNacimiento, documentoPaciente1, altura, (peso+""), rh, 1,"Sin registrar");
-                        mf.getPacienteDAO().actualizar(documentoPaciente1, nuevo);
+                        Paciente nuevo = new Paciente(nombre, fechaDeNacimiento, id, altura, (peso+""), rh, 1,"Sin registrar");
+                        mf.getPacienteDAO().actualizar(id, nuevo);
                         con.imprimirConSalto("Paciente " + nombre + "actualizado correctamente");
                         break;
 
                     case 4:
-                        int documentoDoctor1 = 0;
-                        while (true) {
-                            con.imprimirConSalto("Seleccionar el paciente para actualizar 😷🤒🧑🏼");
-                            con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
-                            con.imprimirConSalto("Ingrese el número de identificación del paciente:");
+                       String idDoc = "";
+					while (true) {
+						con.imprimirConSalto("Seleccionar el doctor para actualizar 😷🤒🧑🏼");
+						con.imprimirConSalto(mf.getDoctorDAO().mostrarTodo());
+						con.imprimirConSalto("Ingrese el número de identificación del doctor:");
 
-                            try {
-                                documentoPaciente1 = con.leerEntero();
-                                con.quemarLinea();
-                                ExceptionChecker.checkDocumento(documentoPaciente1);
-                                break;
-                            } catch (InputMismatchException e) {
-                                con.imprimirConSalto("Error: debe ingresar un número válido.");
-                                con.quemarLinea();
-                            } catch (NegativeValueException | OutOfRangeException e) {
-                                con.imprimirConSalto("Error: " + e.getMessage());
-                            }
-                        }
+						try {
+							int documentoPaciente1 = con.leerEntero();
+							con.quemarLinea();
+							ExceptionChecker.checkDocumento(documentoPaciente1);
+							idDoc = mf.rellenarDocumento(documentoPaciente1);
+							break;
+						} catch (InputMismatchException e) {
+							con.imprimirConSalto("Error: debe ingresar un número válido.");
+							con.quemarLinea();
+						} catch (NegativeValueException | OutOfRangeException e) {
+							con.imprimirConSalto("Error: " + e.getMessage());
+						}
+					}
+					
+					if (mf.documentoExiste(idDoc)==false) {
+						System.out.println("El documento no existe. Vuelva a intentarlo");
+						break;
+					}
                         String nombre1 = "";
                         while (true) {
                             con.imprimirConSalto("Ingresa el nombre del doctor 🧑🏼‍⚕️✨");
@@ -398,53 +414,63 @@ public class Controller {
                             }
                         }
 
-                        Doctor nuevo1 = new Doctor(nombre1, fechaDeNacimiento2, documentoDoctor1, especialidad);
-                        mf.getDoctorDAO().actualizar(documentoDoctor1, nuevo1);
+                        Doctor nuevo1 = new Doctor(nombre1, fechaDeNacimiento2, idDoc, especialidad);
+                        mf.getDoctorDAO().actualizar(idDoc, nuevo1);
 
                     case 5:
-                        int documento1 = 0;
-                        while (true) {
-                            con.imprimirConSalto("Seleccionar el paciente para eliminar 😷🤒🧑🏼");
-                            con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
-                            con.imprimirConSalto("Ingrese el número de identificación del paciente:");
+                       String documento1 = "";
+					while (true) {
+						con.imprimirConSalto("Seleccionar el paciente para eliminar 😷🤒🧑🏼");
+						con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
+						con.imprimirConSalto("Ingrese el número de identificación del paciente:");
 
-                            try {
-                                documento1 = con.leerEntero();
-                                con.quemarLinea();
-                                ExceptionChecker.checkDocumento(documento1);
-                                break;
-                            } catch (InputMismatchException e) {
-                                con.imprimirConSalto("Error: debe ingresar un número válido.");
-                                con.quemarLinea();
-                            } catch (NegativeValueException | OutOfRangeException e) {
-                                con.imprimirConSalto("Error: " + e.getMessage());
-                            }
-                        }
-                        mf.getPacienteDAO().eliminar(mf.getPacienteDAO().getPacienteById(documento1));
-                        con.imprimirConSalto("Paciente eliminado");
-                        break;
+						try {
+							int doc = con.leerEntero();
+							con.quemarLinea();
+							ExceptionChecker.checkDocumento(doc);
+							documento1 = mf.rellenarDocumento(doc); 
+							break;
+						} catch (InputMismatchException e) {
+							con.imprimirConSalto("Error: debe ingresar un número válido.");
+							con.quemarLinea();
+						} catch (NegativeValueException | OutOfRangeException e) {
+							con.imprimirConSalto("Error: " + e.getMessage());
+						}
+					}
+					if (mf.documentoExiste(documento1)==false) {
+						System.out.println("El documento no existe. Vuelva a intentarlo");
+						break;
+					}
+					mf.getPacienteDAO().eliminar(mf.getPacienteDAO().getPacienteById(documento1));
+					con.imprimirConSalto("Paciente eliminado");
+					break;
                     case 6:
-                        int documento2 = 0;
-                        while (true) {
-                            con.imprimirConSalto("Seleccionar el doctor para eliminar 😷🤒🧑🏼");
-                            con.imprimirConSalto(mf.getDoctorDAO().mostrarTodo());
-                            con.imprimirConSalto("Ingrese el número de identificación del doctor:");
+                        String documento2 = "";
+					while (true) {
+						con.imprimirConSalto("Seleccionar el doctor para eliminar 😷🤒🧑🏼");
+						con.imprimirConSalto(mf.getDoctorDAO().mostrarTodo());
+						con.imprimirConSalto("Ingrese el número de identificación del doctor:");
 
-                            try {
-                                documento2 = con.leerEntero();
-                                con.quemarLinea();
-                                ExceptionChecker.checkDocumento(documento2);
-                                break;
-                            } catch (InputMismatchException e) {
-                                con.imprimirConSalto("Error: debe ingresar un número válido.");
-                                con.quemarLinea();
-                            } catch (NegativeValueException | OutOfRangeException e) {
-                                con.imprimirConSalto("Error: " + e.getMessage());
-                            }
-                        }
-                        mf.getPacienteDAO().eliminar(mf.getPacienteDAO().getPacienteById(documento2));
-                        con.imprimirConSalto("Doctor eliminado");
-                        break;
+						try {
+							int id1 = con.leerEntero();
+							con.quemarLinea();
+							ExceptionChecker.checkDocumento(id1);
+							documento2 = mf.rellenarDocumento(id1); 
+							break;
+						} catch (InputMismatchException e) {
+							con.imprimirConSalto("Error: debe ingresar un número válido.");
+							con.quemarLinea();
+						} catch (NegativeValueException | OutOfRangeException e) {
+							con.imprimirConSalto("Error: " + e.getMessage());
+						}
+					}
+					if (mf.documentoExiste(documento2)==false) {
+						System.out.println("El documento no existe. Vuelva a intentarlo");
+						break;
+					}
+					mf.getDoctorDAO().eliminar(mf.getDoctorDAO().getDoctorById(documento2));
+					con.imprimirConSalto("Doctor eliminado");
+					break;
                     case 7:
                         con.imprimirConSalto("Mostrando pacientes....");
                         con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
@@ -457,25 +483,31 @@ public class Controller {
 
                     case 9:
                         try {
-                            int documentoPaciente = 0;
-                            while (true) {
-                                con.imprimirConSalto("Seleccionar el paciente a diagnosticar 😷🤒🧑🏼");
-                                con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
-                                con.imprimirConSalto("Ingrese el número de identificación del paciente:");
+                            String documentoPaciente = "";
+						while (true) {
+							con.imprimirConSalto("Seleccionar el paciente a diagnosticar 😷🤒🧑🏼");
+							con.imprimirConSalto(mf.getPacienteDAO().mostrarTodo());
+							con.imprimirConSalto("Ingrese el número de identificación del paciente:");
 
-                                try {
-                                    documentoPaciente = con.leerEntero();
-                                    con.imprimirConSalto(mf.getPacienteDAO().getPacienteById(documentoPaciente).toString());
-                                    con.quemarLinea();
-                                    ExceptionChecker.checkDocumento(documentoPaciente);
-                                    break;
-                                } catch (InputMismatchException e) {
-                                    con.imprimirConSalto("Error: debe ingresar un número válido.");
-                                    con.quemarLinea();
-                                } catch (NegativeValueException | OutOfRangeException e) {
-                                    con.imprimirConSalto("Error: " + e.getMessage());
-                                }
-                            }
+							try {
+								int pac = con.leerEntero();
+								ExceptionChecker.checkDocumento(pac);
+								documentoPaciente = mf.rellenarDocumento(pac); 
+								con.imprimirConSalto(mf.getPacienteDAO().getPacienteById(documentoPaciente).toString());
+								con.quemarLinea();
+								break;
+							} catch (InputMismatchException e) {
+								con.imprimirConSalto("Error: debe ingresar un número válido.");
+								con.quemarLinea();
+							} catch (NegativeValueException | OutOfRangeException e) {
+								con.imprimirConSalto("Error: " + e.getMessage());
+							}
+						}
+						
+						if (mf.documentoExiste(documentoPaciente)==false) {
+							System.out.println("El documento no existe. Vuelva a intentarlo");
+							break;
+						}
 
                             int triage = 0;
                             while (true) {

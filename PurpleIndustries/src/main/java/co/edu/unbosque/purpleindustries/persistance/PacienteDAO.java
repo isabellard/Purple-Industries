@@ -47,8 +47,8 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
     }
 
     @Override
-    public int actualizar(int documento, Paciente datoAActualizar) {
-        if (documento < 0) {
+    public int actualizar(String documento, Paciente datoAActualizar) {
+        if (documento == null) {
             return 0;
         } else {
             Paciente p = getPacienteById(documento);
@@ -89,17 +89,16 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
         }
     }
 
-    public Paciente getPacienteById(int documento) {
-        for (Paciente p : listaPacientes) {
-            if (p.getDocumento() == documento) {
-                return p;
-            }
-        }
-        return null;
+    public Paciente getPacienteById(String documento) {
+		for (Paciente p : listaPacientes) {
+			if (p.getDocumento().equals(documento)) {
+				return p;
+			}
+		}
+		return null;
+	}
 
-    }
-
-    public void modificarDatosMedicos(int documento, int triage, String diagnostico) {
+    public void modificarDatosMedicos(String documento, int triage, String diagnostico) {
         Paciente p = getPacienteById(documento);
 
         if (p != null) {
@@ -139,7 +138,7 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
                 try {
                     String nombre = fila.get(0);
                     String fechaDeNacimiento = fila.get(1);
-                    int documento = Integer.parseInt(fila.get(2));
+                    String documento = fila.get(2);
                     double altura = Double.parseDouble(fila.get(3));
                     String peso = fila.get(4);
                     String rh = fila.get(5);

@@ -8,7 +8,7 @@ public class Doctor extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Doctor(String nombre, String fechaDeNacimiento, int documento) {
+	public Doctor(String nombre, String fechaDeNacimiento, String documento) {
 		super(nombre, fechaDeNacimiento, documento);
 		// TODO Auto-generated constructor stub
 	}
@@ -18,7 +18,7 @@ public class Doctor extends Persona {
 		this.especialidad = especialidad;
 	}
 
-	public Doctor(String nombre, String fechaDeNacimiento, int documento, String especialidad) {
+	public Doctor(String nombre, String fechaDeNacimiento, String documento, String especialidad) {
 		super(nombre, fechaDeNacimiento, documento);
 		this.especialidad = especialidad;
 	}

@@ -8,7 +8,7 @@ public interface OperacionDAO<C> {
 
 	public int eliminar(C datoAEliminar);
 
-	public int actualizar(int index, C datoAActualizar);
+	public int actualizar(String index, C datoAActualizar);
 
 	public String mostrarTodo();
 

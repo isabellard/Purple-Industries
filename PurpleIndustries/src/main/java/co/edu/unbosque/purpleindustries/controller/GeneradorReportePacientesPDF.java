@@ -11,9 +11,11 @@ import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 
 import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import org.jfree.chart.ChartFactory;
@@ -42,19 +44,13 @@ public class GeneradorReportePacientesPDF {
 
     private static final int FONT_SIZE_TITULO = 22;
 
-    public void generarReporteMensualPacientes(List<Paciente> pacientes, YearMonth periodo) {
+    public void generarReporteMensualPacientes(List<Paciente> pacientes, YearMonth periodo, String nombreArchivo) {
         try {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Guardar reporte mensual de pacientes (PDF)");
-            fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos PDF (*.pdf)", "pdf"));
+        	String userHome = System.getProperty("user.home");
+        	String destino = userHome + File.separator + "Downloads" 
+        	        + File.separator + nombreArchivo +"_" +"Reporte_" + periodo + ".pdf";
 
-            int userSelection = fileChooser.showSaveDialog(null);
-            if (userSelection != JFileChooser.APPROVE_OPTION) return;
-
-            File fileToSave = fileChooser.getSelectedFile();
-            String destino = fileToSave.getAbsolutePath();
-            if (!destino.toLowerCase().endsWith(".pdf")) destino += ".pdf";
-
+        	
             List<Paciente> delMes = filtrarPorMes(pacientes, periodo);
 
             Document document = new Document();

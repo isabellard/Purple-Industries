@@ -101,11 +101,27 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
 	public void modificarDatosMedicos(String documento, int triage, String diagnostico) {
 		Paciente p = getPacienteById(documento);
 
-		if (p != null) {
-			p.setTriage(triage);
-			p.setDiagnostico(diagnostico);
-			escribirEnArchivo();
+        if (p != null) {
+            p.setTriage(triage);
+            p.setDiagnostico(diagnostico);
+            escribirEnArchivo();
+        }
+
+    }
+    
+    public ArrayList<Paciente> filtrarCriticos() {
+    	ArrayList<Paciente> listaCriticos = new ArrayList<>();
+    	for (Paciente paciente : listaPacientes) {
+			if (paciente.getTriage() == 1) {
+				listaCriticos.add(paciente);
+			}
 		}
+    	return listaCriticos;
+    }
+    
+
+    public void escribirEnArchivo() {
+        List<List<Object>> datos = new ArrayList<>();
 
 	}
 

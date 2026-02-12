@@ -108,6 +108,17 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
         }
 
     }
+    
+    public ArrayList<Paciente> filtrarCriticos() {
+    	ArrayList<Paciente> listaCriticos = new ArrayList<>();
+    	for (Paciente paciente : listaPacientes) {
+			if (paciente.getTriage() == 1) {
+				listaCriticos.add(paciente);
+			}
+		}
+    	return listaCriticos;
+    }
+    
 
     public void escribirEnArchivo() {
         List<List<Object>> datos = new ArrayList<>();

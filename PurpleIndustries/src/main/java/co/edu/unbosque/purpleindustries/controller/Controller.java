@@ -645,7 +645,10 @@ public class Controller {
 					}
 					break;
 				case 10: {
-					exportarReporteMensualActual();
+					con.imprimirConSalto("Cómo desea llamar al archivo: ");
+					String nombreArchivo = con.leerLinea();
+					exportarReporteMensualActual(nombreArchivo);
+					con.imprimirConSalto("Archivo guardado en Descargas");
 					break;
 				}
 				case 0:
@@ -675,11 +678,11 @@ public class Controller {
 				+ " oz\nPeso en miligramos: " + mg + " mg\nPeso en kilos: " + peso + " kg";
 	}
 
-	public void exportarReporteMensualActual() {
+	public void exportarReporteMensualActual(String nombreArchivo) {
 
 		YearMonth periodoActual = YearMonth.now();
 
-		pdf.generarReporteMensualPacientes(mf.getPacienteDAO().getListaPacientes(), periodoActual);
+		pdf.generarReporteMensualPacientes(mf.getPacienteDAO().getListaPacientes(), periodoActual, nombreArchivo);
 	}
 
 	private String preguntarEstado(List<String> estados, String texto) {

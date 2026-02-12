@@ -1,6 +1,7 @@
 package co.edu.unbosque.purpleindustries.persistance;
 
 import co.edu.unbosque.purpleindustries.model.Paciente;
+import co.edu.unbosque.purpleindustries.util.ConversorAltura;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -111,58 +112,81 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
     public void escribirEnArchivo() {
         List<List<Object>> datos = new ArrayList<>();
 
-		for (Paciente paciente : listaPacientes) {
-			List<Object> fila = new ArrayList<>();
-			fila.add(paciente.getNombre());
-			fila.add(paciente.getFechaDeNacimiento());
-			fila.add(paciente.getEdad());
-			fila.add(paciente.getSignoZodiacal());
-			fila.add(paciente.getDocumento());
-			fila.add(paciente.getEmail());
-			fila.add(paciente.getAltura());
-			fila.add(paciente.getPeso());
-			fila.add(paciente.getRh());
-			fila.add(paciente.getTriage());
-			fila.add(paciente.getDiagnostico());
-			datos.add(fila);
-		}
+        for (Paciente paciente : listaPacientes) {
+            List<Object> fila = new ArrayList<>();
 
-		SheetsManager.append(datos, TEXT_FILE_NAME);
+            fila.add(paciente.getNombre());
+            fila.add(paciente.getFechaDeNacimiento());
+            fila.add(paciente.getEdad());
+            fila.add(paciente.getSignoZodiacal());
+            fila.add(paciente.getDocumento());
+            fila.add(paciente.getEmail());
+
+            double metros = paciente.getAltura();
+
+            fila.add(ConversorAltura.metrosTexto(metros));
+            fila.add(ConversorAltura.cmTexto(metros));
+            fila.add(ConversorAltura.dmTexto(metros));
+            fila.add(ConversorAltura.piesTexto(metros));
+            fila.add(ConversorAltura.codosTexto(metros));
 
 
+            fila.add(paciente.getPeso());
+            fila.add(paciente.getRh());
+            fila.add(paciente.getTriage());
+            fila.add(paciente.getDiagnostico());
+
+            fila.add(paciente.getFechaIngreso() != null
+                    ? paciente.getFechaIngreso().toString()
+                    : LocalDate.now().toString());
+
+            datos.add(fila);
+        }
+
+        SheetsManager.append(datos, TEXT_FILE_NAME);
     }
 
+
     public void cargarDesdeArchivo() {
-        List<List<String>> datos = SheetsManager.leerDesdeSheets(TEXT_FILE_NAME, "A:L");
+
+        List<List<String>> datos = SheetsManager.leerDesdeSheets(TEXT_FILE_NAME, "A:P");
 
         for (int i = 0; i < datos.size(); i++) {
+
             List<String> fila = datos.get(i);
-            if (fila.size() >= 10) {
+
+            if (fila.size() >= 16) {
+
                 try {
-                	String nombre = fila.get(0);
-					String fechaDeNacimiento = fila.get(1);
-					int edad = Integer.parseInt(fila.get(2));
-					String signoZodiaco = fila.get(3);
-					String documento = fila.get(4);
-					String email = fila.get(5);
-					double altura = Double.parseDouble(fila.get(6));
-					String peso = fila.get(7);
-					String rh = fila.get(8);
-					int triage = Integer.parseInt(fila.get(9));
-					String diagnostico = fila.get(10);
-                    String fechaIngresoStr = fila.get(11);
+
+                    String nombre = fila.get(0);
+                    String fechaDeNacimiento = fila.get(1);
+                    int edad = Integer.parseInt(fila.get(2));
+                    String signoZodiaco = fila.get(3);
+                    String documento = fila.get(4);
+                    String email = fila.get(5);
+                    String alturaTexto = fila.get(6)  .replace(" m", "")  .replace(",", ".")  .trim();
+                    double altura = Double.parseDouble(alturaTexto);
+                    String peso = fila.get(11);
+                    String rh = fila.get(12);
+                    int triage = Integer.parseInt(fila.get(13));
+                    String diagnostico = fila.get(14);
+
+                    String fechaIngresoStr = fila.get(15);
                     LocalDate fechaIngreso = LocalDate.parse(fechaIngresoStr);
+
                     listaPacientes.add(
-                            new Paciente(nombre, fechaDeNacimiento, documento, email, altura, peso, rh, triage, diagnostico, fechaIngreso));
-                } catch (NumberFormatException e) {
-                    System.err.println("Error en formato de números en fila " + (i + 1));
+                            new Paciente( nombre,fechaDeNacimiento, documento,email,altura,peso,rh,triage,diagnostico, fechaIngreso) );
+
                 } catch (Exception e) {
+
                     System.err.println("Error procesando fila " + (i + 1) + ": " + e.getMessage());
+
                 }
             }
         }
-
     }
+
 
     public ArrayList<Paciente> getListaPacientes() {
     return listaPacientes;

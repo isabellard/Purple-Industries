@@ -24,8 +24,9 @@ public class Console {
 	}
 
 	public double leerDouble() {
-		return lector.nextDouble();
+	    return Double.parseDouble(lector.nextLine().replace(",", "."));
 	}
+
 
 	public String leerPalabra() {
 		return lector.next();

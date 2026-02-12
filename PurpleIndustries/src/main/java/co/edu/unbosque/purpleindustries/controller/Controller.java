@@ -332,8 +332,7 @@ public class Controller {
                             }
                         }
 
-                        Paciente nuevo = new Paciente(nombre, fechaDeNacimiento, documentoPaciente1, altura, peso, rh, 1,
-                                "Sin registrar");
+                        Paciente nuevo = new Paciente(nombre, fechaDeNacimiento, documentoPaciente1, altura, (peso+""), rh, 1,"Sin registrar");
                         mf.getPacienteDAO().actualizar(documentoPaciente1, nuevo);
                         con.imprimirConSalto("Paciente " + nombre + "actualizado correctamente");
                         break;
@@ -680,16 +679,9 @@ public class Controller {
         );
         String diagnostico = diagnosticos.get(random.nextInt(diagnosticos.size()));
 
-        return new Paciente(
-                nombre,
-                fechaNacimiento,
-                documento,
-                altura,
-                peso,
-                rh,
-                triage,
-                diagnostico
-        );
+        return new Paciente(nombre, fechaNacimiento, documento, altura, (peso+""), rh, triage, diagnostico);
+        		
+        		
     }
     
     public String unidadesPeso(double peso) {

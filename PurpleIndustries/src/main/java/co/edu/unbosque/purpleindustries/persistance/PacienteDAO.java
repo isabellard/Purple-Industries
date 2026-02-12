@@ -141,7 +141,7 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
                     String fechaDeNacimiento = fila.get(1);
                     int documento = Integer.parseInt(fila.get(2));
                     double altura = Double.parseDouble(fila.get(3));
-                    double peso = Double.parseDouble(fila.get(4));
+                    String peso = fila.get(4);
                     String rh = fila.get(5);
                     int triage = Integer.parseInt(fila.get(6));
                     String diagnostico = fila.get(7);

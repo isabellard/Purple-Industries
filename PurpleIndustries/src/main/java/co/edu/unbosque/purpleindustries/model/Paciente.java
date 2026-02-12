@@ -3,7 +3,7 @@ package co.edu.unbosque.purpleindustries.model;
 public class Paciente extends Persona {
 
 	private double altura;
-	private double peso;
+	private String peso;
 	private String rh;
 	private int triage;
 	private String diagnostico;
@@ -17,7 +17,7 @@ public class Paciente extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Paciente(double altura, double peso, String rh, int triage, String diagnostico) {
+	public Paciente(double altura, String peso, String rh, int triage, String diagnostico) {
 		super();
 		this.altura = altura;
 		this.peso = peso;
@@ -26,7 +26,7 @@ public class Paciente extends Persona {
 		this.diagnostico = diagnostico;
 	}
 
-	public Paciente(String nombre, String fechaDeNacimiento, int documento, double altura, double peso, String rh,
+	public Paciente(String nombre, String fechaDeNacimiento, int documento, double altura, String peso, String rh,
 			int triage, String diagnostico) {
 		super(nombre, fechaDeNacimiento, documento);
 		this.altura = altura;
@@ -52,7 +52,7 @@ public class Paciente extends Persona {
 	/**
 	 * @return the peso
 	 */
-	public double getPeso() {
+	public String getPeso() {
 		return peso;
 	}
 
@@ -87,7 +87,7 @@ public class Paciente extends Persona {
 	/**
 	 * @param peso the peso to set
 	 */
-	public void setPeso(double peso) {
+	public void setPeso(String peso) {
 		this.peso = peso;
 	}
 

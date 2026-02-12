@@ -46,6 +46,7 @@ public class Controller {
                 con.imprimirConSalto("8. Ver todos los doctores");
                 con.imprimirConSalto("9. Diagnosticar pacientes");
                 con.imprimirConSalto("10. Activar bot auto add (solo se detiene cuando se apaga el programa)");
+				con.imprimirConSalto("11. Descargar reporte");
                 con.imprimirConSalto("0. salir");
 
                 int opcion;
@@ -59,7 +60,7 @@ public class Controller {
                     continue;
                 }
 
-                if (opcion < 0 || opcion > 10) {
+                if (opcion < 0 || opcion > 11) {
                     System.out.println(" Opción incorrecta. Ingrese un número entre 0 y 9.");
                     continue;
                 }
@@ -580,6 +581,10 @@ public class Controller {
                                 bandera = 0;
                             }
                         }
+                    case 11: {
+    					exportarReporteMensualActual();
+    					break;
+    				}
                     case 0:
                         salir = true;
                         con.imprimirConSalto("Saliendo del programa, hasta luego!!! 😷");

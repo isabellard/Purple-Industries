@@ -734,9 +734,7 @@ public class Controller {
 	}
 
 	public void exportarReporteMensualActual(String nombreArchivo) {
-
 		YearMonth periodoActual = YearMonth.now();
-
 		pdf.generarReporteMensualPacientes(mf.getPacienteDAO().getListaPacientes(), periodoActual, nombreArchivo);
 	}
 	

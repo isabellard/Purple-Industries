@@ -120,11 +120,6 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
     }
     
 
-    public void escribirEnArchivo() {
-        List<List<Object>> datos = new ArrayList<>();
-
-	}
-
 	public String modificarTiempoAtencion(String documento, int tiempoAtencion) {
 		Paciente p = getPacienteById(documento);
 
@@ -234,5 +229,7 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
 	public ArrayList<Paciente> getListaPacientes() {
 		return listaPacientes;
 	}
+	
+	
 
 }

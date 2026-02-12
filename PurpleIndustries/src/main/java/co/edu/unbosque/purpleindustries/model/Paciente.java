@@ -12,8 +12,8 @@ public class Paciente extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Paciente(String nombre, String fechaDeNacimiento, int documento) {
-		super(nombre, fechaDeNacimiento, documento);
+	public Paciente(String nombre, String fechaDeNacimiento, int documento, String email) {
+		super(nombre, fechaDeNacimiento, documento, email);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -26,9 +26,9 @@ public class Paciente extends Persona {
 		this.diagnostico = diagnostico;
 	}
 
-	public Paciente(String nombre, String fechaDeNacimiento, int documento, double altura, double peso, String rh,
-			int triage, String diagnostico) {
-		super(nombre, fechaDeNacimiento, documento);
+	public Paciente(String nombre, String fechaDeNacimiento, int documento, String email, double altura, double peso,
+			String rh, int triage, String diagnostico) {
+		super(nombre, fechaDeNacimiento, documento, email);
 		this.altura = altura;
 		this.peso = peso;
 		this.rh = rh;
@@ -39,7 +39,7 @@ public class Paciente extends Persona {
 	@Override
 	public String toString() {
 		return super.toString() + "\n Altura: " + altura + "\n Peso: " + peso + "\n Rh: " + rh + "\n Triage: " + triage
-				+ "\n Diagnóstico: " + diagnostico + "\n--------------------------------";
+				+ "\n DiagnÃ³stico: " + diagnostico + "\n--------------------------------";
 	}
 
 	/**

@@ -3,14 +3,19 @@ package co.edu.unbosque.purpleindustries.model;
 public class Doctor extends Persona {
 
 	private String especialidad;
-	
+
 	public Doctor() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Doctor(String nombre, String fechaDeNacimiento, int documento) {
-		super(nombre, fechaDeNacimiento, documento);
+	public Doctor(String nombre, String fechaDeNacimiento, int documento, String email) {
+		super(nombre, fechaDeNacimiento, documento, email);
 		// TODO Auto-generated constructor stub
+	}
+
+	public Doctor(String nombre, String fechaDeNacimiento, int documento, String email, String especialidad) {
+		super(nombre, fechaDeNacimiento, documento, email);
+		this.especialidad = especialidad;
 	}
 
 	public Doctor(String especialidad) {
@@ -18,14 +23,9 @@ public class Doctor extends Persona {
 		this.especialidad = especialidad;
 	}
 
-	public Doctor(String nombre, String fechaDeNacimiento, int documento, String especialidad) {
-		super(nombre, fechaDeNacimiento, documento);
-		this.especialidad = especialidad;
-	}
-
 	@Override
 	public String toString() {
-		return super.toString() +  "\n Especialidad: " + especialidad + "\n--------------------------------";
+		return super.toString() + "\n Especialidad: " + especialidad + "\n--------------------------------";
 	}
 
 	/**
@@ -41,9 +41,6 @@ public class Doctor extends Persona {
 	public void setEspecialidad(String especialidad) {
 		this.especialidad = especialidad;
 	}
-	
-	
-	
-	
+
 	
 }

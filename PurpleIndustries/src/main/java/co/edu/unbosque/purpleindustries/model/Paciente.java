@@ -17,6 +17,7 @@ public class Paciente extends Persona {
 
 	public Paciente(String nombre, String fechaDeNacimiento, String documento, String email) {
 		super(nombre, fechaDeNacimiento, documento, email);
+		this.fechaIngreso = (fechaIngreso != null) ? fechaIngreso : LocalDate.now();
 		// TODO Auto-generated constructor stub
 	}
 

@@ -8,9 +8,9 @@ public class Doctor extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Doctor(String nombre, String fechaDeNacimiento, String documento) {
-		super(nombre, fechaDeNacimiento, documento);
-		// TODO Auto-generated constructor stub
+	public Doctor(String nombre, String fechaDeNacimiento, String documento, String email, String especialidad) {
+		super(nombre, fechaDeNacimiento, documento, email);
+		this.especialidad = especialidad;
 	}
 
 	public Doctor(String especialidad) {
@@ -18,9 +18,11 @@ public class Doctor extends Persona {
 		this.especialidad = especialidad;
 	}
 
-	public Doctor(String nombre, String fechaDeNacimiento, String documento, String especialidad) {
-		super(nombre, fechaDeNacimiento, documento);
-		this.especialidad = especialidad;
+	
+	
+	public Doctor(String nombre, String fechaDeNacimiento, String documento, String email) {
+		super(nombre, fechaDeNacimiento, documento, email);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override

@@ -15,10 +15,13 @@ public class Paciente extends Persona {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Paciente(String nombre, String fechaDeNacimiento, String documento, LocalDate fechaIngreso) {
-		super(nombre, fechaDeNacimiento, documento);
+	public Paciente(String nombre, String fechaDeNacimiento, String documento, String email) {
+		super(nombre, fechaDeNacimiento, documento, email);
 		this.fechaIngreso = (fechaIngreso != null) ? fechaIngreso : LocalDate.now();
+		// TODO Auto-generated constructor stub
 	}
+
+
 
 	public Paciente(double altura, String peso, String rh, int triage, String diagnostico, LocalDate fechaIngreso) {
 		super();
@@ -30,9 +33,11 @@ public class Paciente extends Persona {
 		this.fechaIngreso = (fechaIngreso != null) ? fechaIngreso : LocalDate.now();
 	}
 
-	public Paciente(String nombre, String fechaDeNacimiento, String documento, double altura, String peso, String rh,
-			int triage, String diagnostico, LocalDate fechaIngreso) {
-		super(nombre, fechaDeNacimiento, documento);
+	
+
+	public Paciente(String nombre, String fechaDeNacimiento, String documento, String email, double altura, String peso,
+			String rh, int triage, String diagnostico, LocalDate fechaIngreso) {
+		super(nombre, fechaDeNacimiento, documento, email);
 		this.altura = altura;
 		this.peso = peso;
 		this.rh = rh;

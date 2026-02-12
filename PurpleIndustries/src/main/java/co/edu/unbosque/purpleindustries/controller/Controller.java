@@ -151,7 +151,8 @@ public class Controller {
 							try {
 								pesoD = con.leerDouble();
 								ExceptionChecker.checkPeso(pesoD);
-								con.imprimirConSalto("Peso registrado: " + peso + " kg");
+								peso = unidadesPeso(pesoD);
+								con.imprimirConSalto("Peso registrado: " + pesoD + " kg");
 								break;
 							} catch (InputMismatchException e) {
 								con.imprimirConSalto("Error: debe ingresar un número válido.");
@@ -363,13 +364,15 @@ public class Controller {
 							"Ingrese el tipo de sangre del paciente 🧑🏼‍⚕️✨"));
 					con.imprimirConSalto("RH registrado: " + rh);
 
-					double peso = 0;
+					String peso = "";
+					double pesoD = 0;
 					while (true) {
 						con.imprimirConSalto("Ingrese el peso del paciente (kg) 🧑🏼‍⚕️✨");
 						try {
-							peso = con.leerEntero();
+							pesoD = con.leerDouble();
 							con.quemarLinea();
-							ExceptionChecker.checkPeso(peso);
+							ExceptionChecker.checkPeso(pesoD);
+							peso = unidadesPeso(pesoD);
 							con.imprimirConSalto("Peso registrado: " + peso + " kg");
 							break;
 						} catch (InputMismatchException e) {

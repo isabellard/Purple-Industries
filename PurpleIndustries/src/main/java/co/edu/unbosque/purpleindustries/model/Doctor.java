@@ -18,6 +18,11 @@ public class Doctor extends Persona {
 		this.especialidad = especialidad;
 	}
 
+	public Doctor(String nombre, String fechaDeNacimiento, int documento, String email, String especialidad) {
+		super(nombre, fechaDeNacimiento, documento, email);
+		this.especialidad = especialidad;
+	}
+
 	public Doctor(String especialidad) {
 		super();
 		this.especialidad = especialidad;

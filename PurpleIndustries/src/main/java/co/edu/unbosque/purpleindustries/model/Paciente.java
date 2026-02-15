@@ -10,7 +10,7 @@ public class Paciente extends Persona {
 	private int triage;
 	private String diagnostico;
 	private LocalDate fechaIngreso;
-	
+	private String tiempoAtencion; 
 
 	public Paciente() {
 		// TODO Auto-generated constructor stub
@@ -24,7 +24,7 @@ public class Paciente extends Persona {
 
 
 
-	public Paciente(double altura, String peso, String rh, int triage, String diagnostico, LocalDate fechaIngreso) {
+	public Paciente(double altura, String peso, String rh, int triage, String diagnostico, LocalDate fechaIngreso, String tiempoAtencion) {
 		super();
 		this.altura = altura;
 		this.peso = peso;
@@ -32,12 +32,13 @@ public class Paciente extends Persona {
 		this.triage = triage;
 		this.diagnostico = diagnostico;
 		this.fechaIngreso = (fechaIngreso != null) ? fechaIngreso : LocalDate.now();
+		this.tiempoAtencion= tiempoAtencion;
 	}
 
 	
 
 	public Paciente(String nombre, String fechaDeNacimiento, String documento, String email, double altura, String peso,
-			String rh, int triage, String diagnostico, LocalDate fechaIngreso) {
+			String rh, int triage, String diagnostico, LocalDate fechaIngreso, String tiempoAtencion) {
 		super(nombre, fechaDeNacimiento, documento, email);
 		this.altura = altura;
 		this.peso = peso;
@@ -45,6 +46,7 @@ public class Paciente extends Persona {
 		this.triage = triage;
 		this.diagnostico = diagnostico;
 		this.fechaIngreso = (fechaIngreso != null) ? fechaIngreso : LocalDate.now();
+		this.tiempoAtencion = tiempoAtencion; 
 	}
 
 	@Override
@@ -130,4 +132,21 @@ public class Paciente extends Persona {
 	public void setDiagnostico(String diagnostico) {
 		this.diagnostico = diagnostico;
 	}
+
+	/**
+	 * @return the tiempoAtencion
+	 */
+	public String getTiempoAtencion() {
+		return tiempoAtencion;
+	}
+
+	/**
+	 * @param tiempoAtencion the tiempoAtencion to set
+	 */
+	public void setTiempoAtencion(String tiempoAtencion) {
+		this.tiempoAtencion = tiempoAtencion;
+	}
+	
+
+
 }

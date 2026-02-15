@@ -130,5 +130,4 @@ public class Paciente extends Persona {
 	public void setDiagnostico(String diagnostico) {
 		this.diagnostico = diagnostico;
 	}
-
 }

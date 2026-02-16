@@ -147,6 +147,6 @@ public class Paciente extends Persona {
 		this.tiempoAtencion = tiempoAtencion;
 	}
 	
-	
+
 
 }

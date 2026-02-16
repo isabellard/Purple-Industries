@@ -165,12 +165,14 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
 
 			double metros = paciente.getAltura();
 
-			fila.add(ConversorAltura.metrosTexto(metros));
-			fila.add(ConversorAltura.cmTexto(metros));
-			fila.add(ConversorAltura.dmTexto(metros));
-			fila.add(ConversorAltura.piesTexto(metros));
-			fila.add(ConversorAltura.codosTexto(metros));
+			String alturaTexto =
+			        "Altura en metros: " + ConversorAltura.metrosTexto(metros) + "\n" +
+			        "Altura en cm: " + ConversorAltura.cmTexto(metros) + "\n" +
+			        "Altura en dm: " + ConversorAltura.dmTexto(metros) + "\n" +
+			        "Altura en pies: " + ConversorAltura.piesTexto(metros) + "\n" +
+			        "Altura en codos: " + ConversorAltura.codosTexto(metros);
 
+			fila.add(alturaTexto);
 			fila.add(paciente.getPeso());
 			fila.add(paciente.getRh());
 			fila.add(paciente.getTriage());
@@ -226,9 +228,10 @@ public class PacienteDAO implements OperacionDAO<Paciente> {
 		}
 	}
 
-	public ArrayList<Paciente> getListaPacientes() {
-		return listaPacientes;
-	}
+    public ArrayList<Paciente> getListaPacientes() {
+    return listaPacientes;
+}
+
 	
 	
 
